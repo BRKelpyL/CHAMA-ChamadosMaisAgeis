@@ -20,4 +20,5 @@ Esse projeto tem como finalidade registrar o avanço do desenvolvimento do siste
 	No geral, o que esperamos é um app que possibilite:
 
 	- A criação, visualização, edição e exclusão de chamados e usuários;
-	- 
+	- Acesso a dados de contato do solicitante para que possa ser solicitada informações que contribuam para resolução do problema;
+	- Interface web simples e intuitiva.
