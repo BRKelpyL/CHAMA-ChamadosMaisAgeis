@@ -30,3 +30,7 @@ Esse projeto tem como finalidade registrar o avanço do desenvolvimento do siste
   - NodeJS;
   - ExpressJS;
   - Docker.
+
+- Project Manager:
+
+  [www.linkedin.com/Kelpy](https://www.linkedin.com/in/kelpy-de-azevedo-lima)
