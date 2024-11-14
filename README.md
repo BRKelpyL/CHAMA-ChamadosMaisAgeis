@@ -1,4 +1,4 @@
-# Projeto Resolução de Chamados
+# CHAMA - Chamados Mais Ágeis
 
 Esse projeto tem como finalidade registrar o avanço do desenvolvimento do sistema de abertura de resolução de chamados internos.
 
