@@ -1,0 +1,68 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id                String                      @id
+  name              String
+  email             String
+  password          String
+  isAdmin           Boolean
+  sector            UserSector[]
+  whatsapp          String?
+  servicesToExecute UserToExecuteServiceOrder[]
+  servicesToWait    UserToWaitServiceOrder[]
+  ownedSector       Sector?
+}
+
+model Sector {
+  id           Int            @id
+  name         String
+  owner        String?        @unique
+  members      UserSector[]
+  user         User?          @relation(fields: [owner], references: [id])
+  ServiceOrder ServiceOrder[]
+}
+
+model UserSector {
+  id       Int    @id @default(autoincrement())
+  userId   String
+  sectorId Int
+  user     User   @relation(fields: [userId], references: [id])
+  sector   Sector @relation(fields: [sectorId], references: [id])
+}
+
+model ServiceOrder {
+  id             Int                         @id
+  title          String
+  description    String
+  toSector       Sector                      @relation(fields: [sectorId], references: [id])
+  status         Int
+  solicitatedAt  DateTime
+  updatedAt      DateTime
+  whoAskedFor    UserToWaitServiceOrder[]
+  whoWillExecute UserToExecuteServiceOrder[]
+  sectorId       Int
+  userId         String
+}
+
+model UserToExecuteServiceOrder {
+  id             Int          @id @default(autoincrement())
+  userId         String
+  serviceOrderId Int
+  user           User         @relation(fields: [userId], references: [id])
+  serviceOrder   ServiceOrder @relation(fields: [serviceOrderId], references: [id])
+}
+
+model UserToWaitServiceOrder {
+  id             Int          @id @default(autoincrement())
+  userId         String
+  serviceOrderId Int
+  user           User         @relation(fields: [userId], references: [id])
+  serviceOrder   ServiceOrder @relation(fields: [serviceOrderId], references: [id])
+}
