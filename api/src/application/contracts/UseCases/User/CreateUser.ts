@@ -1,4 +1,4 @@
-import { UseCase } from "./UseCase";
+import { UseCase } from "../UseCase";
 
 export type CreateUserInputDto = {
     name: string;
@@ -18,4 +18,4 @@ export type CreateUserOutputDto = {
 };
 
 export interface CreateUser
-    extends UseCase<CreateUserInputDto, CreateUserOutputDto> {}
+    extends UseCase<CreateUserInputDto, CreateUserOutputDto | Error> {}

@@ -2,11 +2,11 @@ import { PrismaClient } from "@prisma/client";
 import { User } from "../../../../domain/models";
 import { LoadUsersRepository } from "../../../../domain/repositories";
 
-export class LoadUserPrismaRepository implements LoadUsersRepository {
+export class LoadUsersPrismaRepository implements LoadUsersRepository {
     private constructor(private readonly prismaClient: PrismaClient) {}
 
     public static create(prismaClient: PrismaClient): LoadUsersRepository {
-        return new LoadUserPrismaRepository(prismaClient);
+        return new LoadUsersPrismaRepository(prismaClient);
     }
 
     public async load(): Promise<User[]> {

@@ -1,4 +1,4 @@
-import { UseCase } from "./UseCase";
+import { UseCase } from "../UseCase";
 
 export type LoadUsersInputDto = void;
 
@@ -14,4 +14,4 @@ export type LoadUsersOutputDto = {
 };
 
 export interface LoadUsers
-    extends UseCase<LoadUsersInputDto, LoadUsersOutputDto> {}
+    extends UseCase<LoadUsersInputDto, LoadUsersOutputDto | Error> {}

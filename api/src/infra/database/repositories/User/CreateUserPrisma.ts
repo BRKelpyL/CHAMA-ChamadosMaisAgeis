@@ -11,28 +11,29 @@ export class CreateUserPrismaRepository implements CreateUserRepository {
         return new CreateUserPrismaRepository(prismaClient);
     }
 
-    public async save(user: User): Promise<User> {
-        const { id, name, email, password, isAdmin, whatsapp } =
-            await this.prismaClient.user.create({
-                data: {
-                    id: user.getId(),
-                    name: user.getName(),
-                    email: user.getEmail(),
-                    password: user.getPassword(),
-                    isAdmin: user.getIsAdmin(),
-                    whatsapp: user.getWhatsapp(),
-                },
-            });
-
-        const createdUser = new User({
-            id,
-            name,
-            email,
-            password,
-            isAdmin: isAdmin ?? false,
-            whatsapp: whatsapp ?? undefined,
+    public async save(user: User): Promise<User | undefined> {
+        const createdUser = await this.prismaClient.user.create({
+            data: {
+                id: user.getId(),
+                name: user.getName(),
+                email: user.getEmail(),
+                password: user.getPassword(),
+                isAdmin: user.getIsAdmin(),
+                whatsapp: user.getWhatsapp(),
+            },
         });
 
-        return createdUser;
+        if (!createdUser) {
+            return undefined;
+        }
+
+        return new User({
+            id: createdUser.id,
+            name: createdUser.name,
+            email: createdUser.email,
+            password: createdUser.password,
+            isAdmin: createdUser.isAdmin ?? false,
+            whatsapp: createdUser.whatsapp ?? undefined,
+        });
     }
 }

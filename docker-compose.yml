@@ -1,0 +1,33 @@
+services:
+  chama-db:
+    image: postgres
+    container_name: chama_postgres-db
+    volumes:
+      - ./dev-data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_PASSWORD={POSTGRES_PASSWORD}
+      - POSTGRES_USER={POSTGRES_USER}
+    ports:
+      - 5432:5432
+    restart: always
+
+  chama-api:
+    build: ./api
+    container_name: chama_node-api
+    ports:
+      - 4001:4001
+    depends_on:
+      - chama-db
+    env_file:
+      - ./api/.env
+
+  chama-nginx:
+    build: ./nginx
+    container_name: chama_nginx
+    ports:
+      - 80:80
+    depends_on:
+      - chama-db
+
+volumes:
+  dev-data:

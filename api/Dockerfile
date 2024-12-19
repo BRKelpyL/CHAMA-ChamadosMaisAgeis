@@ -1,0 +1,16 @@
+# ESSE DOCKERFILE NÃO SERVE PARA DEPLOY, LEMBRE-SE DE ADAPTAR ELE PARA ESSA FUNÇÃO!
+# RODAR ESSA OU QUALQUER OUTRA APLICAÇÃO EM DEV TORNA O SISTEMA SUJEITO A PROBLEMAS DE SEGURANÇA E INSTABILIDADE!
+
+FROM node:23.3.0
+
+WORKDIR /api
+
+COPY . .
+
+# RUN rm -rf node_modules
+# RUN npm install
+
+CMD [ "npm", "run", "dev"]
+
+EXPOSE 4001
+# Lembre de trocar o valor em .env

@@ -1,13 +1,12 @@
-import { CreateUser } from "../../../application/contracts";
+import { CreateUser } from "../../../../application/contracts";
 import {
     CreateUserHttp,
     CreateUserHttpInputDto,
     CreateUserHttpOutputDto,
     HttpResponse,
-    created,
-} from "../../http";
-import { badRequest, serverError, unknownError } from "../helpers";
-import { MissingParamError } from "../errors";
+} from "../..";
+import { badRequest, serverError, unknownError, created } from "../../helpers";
+import { MissingParamError } from "../../errors";
 
 export class CreateUserHttpController implements CreateUserHttp {
     constructor(private readonly createUser: CreateUser) {}
@@ -22,6 +21,10 @@ export class CreateUserHttpController implements CreateUserHttp {
             }
 
             const createdUser = await this.createUser.execute(request);
+
+            if (createdUser instanceof Error) {
+                return badRequest(createdUser);
+            }
 
             return created<CreateUserHttpOutputDto>(createdUser);
         } catch (error) {

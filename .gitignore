@@ -1,0 +1,12 @@
+# Ignore from general
+.env
+
+# Ignore from API
+api/node_modules
+api/.env
+api/dist
+
+# Ignore from nginx
+
+# Ignore from spa
+spa/dist

@@ -1,28 +1,38 @@
 import { CreateUserUseCase } from "../../../../../application/UseCases";
 import { ServerHttpRest } from "../../contracts";
-import { CreateUserPrismaRepository } from "../../../../database/repositories/User/CreateUserPrisma";
+import {
+    CreateUserPrismaRepository,
+    LoadUserByEmailPrismaRepository,
+    LoadUserByNamePrismaRepository,
+} from "../../../../database/repositories/User";
 import { PrismaClient } from "@prisma/client";
 import {
     GenerateIdCryptoUuidService,
     ConvertToHashBcryptService,
 } from "../../../../services";
-import { CreateUserHttpController } from "../../../controllers";
+import { CreateUserHttpController } from "../../../controllers/User";
 
 export class CreateUserRoute {
     constructor(httpServer: ServerHttpRest, prismaClient: PrismaClient) {
         const createUserPrismaRepository =
             CreateUserPrismaRepository.create(prismaClient);
+        const loadUserByNamePrismaRepository =
+            LoadUserByNamePrismaRepository.create(prismaClient);
+        const loadUserByEmailPrismaRepository =
+            LoadUserByEmailPrismaRepository.create(prismaClient);
         const generateIdCriptoUuid = new GenerateIdCryptoUuidService();
-        const convertToHashService = new ConvertToHashBcryptService();
+        const convertToHash = new ConvertToHashBcryptService();
 
         const createUserUseCase = new CreateUserUseCase(
             createUserPrismaRepository,
+            loadUserByNamePrismaRepository,
+            loadUserByEmailPrismaRepository,
             generateIdCriptoUuid,
-            convertToHashService
+            convertToHash
         );
         const createUserHttpController = new CreateUserHttpController(
             createUserUseCase
         );
-        httpServer.on("post", "/user", createUserHttpController);
+        httpServer.on("post", "/user/create", createUserHttpController);
     }
 }

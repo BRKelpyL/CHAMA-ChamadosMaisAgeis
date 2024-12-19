@@ -1,4 +1,4 @@
-import { HttpController } from "./Controller";
+import { HttpController } from "../Controller";
 
 export type LoadUsersHttpInputDto = void;
 

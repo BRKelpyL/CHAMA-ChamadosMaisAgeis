@@ -1,11 +1,11 @@
-import { startServer } from "./config";
+import { env, startServer } from "./config";
 import { ServerHttpRestExpressAdapter } from "./express";
 
 const serverHttpRestExpressAdapter = new ServerHttpRestExpressAdapter();
 
 startServer({
     serverHttpRest: serverHttpRestExpressAdapter,
-    port: 4001,
+    port: env.server.port,
 }).catch(async (error) => {
     console.error(error);
     process.exit(1);

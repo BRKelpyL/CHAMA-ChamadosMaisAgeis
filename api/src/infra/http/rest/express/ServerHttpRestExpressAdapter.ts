@@ -41,7 +41,7 @@ export class ServerHttpRestExpressAdapter implements ServerHttpRest {
     }
 
     public listen(port: number): void {
-        this.express.listen(port, () => {
+        this.express.listen({port, host: "0.0.0.0"}, () => {
             console.log(`Server running on port ${port}`);
         });
     }

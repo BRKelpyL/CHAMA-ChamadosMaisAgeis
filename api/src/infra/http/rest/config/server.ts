@@ -1,6 +1,12 @@
 import { PrismaClient } from "@prisma/client";
 import { ServerHttpRest } from "../contracts";
-import { CreateUserRoute, LoadUsersRoute } from "../routes";
+import {
+    CreateUserRoute,
+    DeleteUserByIdRoute,
+    LoadUserByIdRoute,
+    LoadUsersRoute,
+    UpdateUserRoute,
+} from "../routes";
 
 export type StartServerProps = {
     serverHttpRest: ServerHttpRest;
@@ -12,6 +18,10 @@ export async function startServer(props: StartServerProps): Promise<void> {
     const { serverHttpRest, port } = props;
 
     new CreateUserRoute(serverHttpRest, prismaClient);
+    new LoadUsersRoute(serverHttpRest, prismaClient);
+    new LoadUserByIdRoute(serverHttpRest, prismaClient);
+    new UpdateUserRoute(serverHttpRest, prismaClient);
+    new DeleteUserByIdRoute(serverHttpRest, prismaClient);
 
     serverHttpRest.listen(port);
 

@@ -1,12 +1,11 @@
-import { LoadUsers } from "../../../application/contracts";
+import { LoadUsers } from "../../../../application/contracts";
 import {
     LoadUserHttpOutputDto,
     LoadUsersHttp,
     LoadUsersHttpInputDto,
     HttpResponse,
-} from "../../http";
-import {} from "../contracts/controllers/LoadUsersHttp";
-import { serverError, sucess, unknownError } from "../helpers";
+} from "../..";
+import { badRequest, serverError, sucess, unknownError } from "../../helpers";
 
 export class LoadUsersHttpController implements LoadUsersHttp {
     constructor(private readonly loadUsers: LoadUsers) {}
@@ -16,6 +15,10 @@ export class LoadUsersHttpController implements LoadUsersHttp {
     ): Promise<HttpResponse<LoadUserHttpOutputDto | Error>> {
         try {
             const users = await this.loadUsers.execute(request);
+            if (users instanceof Error) {
+                return badRequest(users);
+            }
+
             return sucess<LoadUserHttpOutputDto>(users);
         } catch (error) {
             const isError = error instanceof Error;

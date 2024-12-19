@@ -1,6 +1,10 @@
-import { User } from "../../domain/models";
+import { User } from "../../../domain/models";
 import { LoadUsersRepository } from "@/src/domain/repositories/user";
-import { LoadUsersInputDto, LoadUsersOutputDto, LoadUsers } from "../contracts";
+import {
+    LoadUsersInputDto,
+    LoadUsersOutputDto,
+    LoadUsers,
+} from "../../contracts";
 
 export class LoadUsersUseCase implements LoadUsers {
     constructor(private readonly loadUsersRepository: LoadUsersRepository) {}
