@@ -1,5 +1,6 @@
 # Ignore from general
 .env
+dev-data
 
 # Ignore from API
 api/node_modules
