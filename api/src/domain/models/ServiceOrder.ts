@@ -13,6 +13,7 @@ export type ServiceOrderProps = {
     createdAt: Date;
     attibutedAt?: Date;
     closedAt?: Date;
+    deleted: boolean;
 };
 
 export class ServiceOrder {
@@ -24,6 +25,7 @@ export class ServiceOrder {
     private readonly createdAt: Date;
     private readonly attibutedAt?: Date;
     private readonly closedAt?: Date;
+    private readonly deleted: boolean;
 
     constructor(props: ServiceOrderProps) {
         this.id = props.id;
@@ -34,6 +36,7 @@ export class ServiceOrder {
         this.createdAt = props.createdAt;
         this.attibutedAt = props.attibutedAt;
         this.closedAt = props.closedAt;
+        this.deleted = props.deleted;
     }
 
     public getId(): string {
@@ -66,5 +69,9 @@ export class ServiceOrder {
 
     public getClosedAt(): Date | undefined {
         return this.closedAt;
+    }
+
+    public getDeleted(): boolean {
+        return this.deleted;
     }
 }

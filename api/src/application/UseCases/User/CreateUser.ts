@@ -51,6 +51,8 @@ export class CreateUserUseCase implements CreateUser {
             generatedIsAdmin = isAdmin;
         }
 
+        const deleted = false;
+
         const user = new User({
             id,
             name,
@@ -58,6 +60,7 @@ export class CreateUserUseCase implements CreateUser {
             password: hashedPassword,
             isAdmin: generatedIsAdmin,
             whatsapp,
+            deleted,
         });
 
         const createdUser = await this.createUserRepository.save(user);

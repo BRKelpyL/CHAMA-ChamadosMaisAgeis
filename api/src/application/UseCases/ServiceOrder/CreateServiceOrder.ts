@@ -33,6 +33,7 @@ export class CreateServiceOrderUseCase implements CreateServiceOrder {
         const id = this.generateIdService.generate();
         const status: ServiceOrderStatus = "Aberto";
         const createdAt = new Date();
+        const deleted = false;
 
         const serviceOrder = new ServiceOrder({
             id,
@@ -41,6 +42,7 @@ export class CreateServiceOrderUseCase implements CreateServiceOrder {
             toSectorId,
             status,
             createdAt,
+            deleted,
         });
 
         const createdServiceOrder =

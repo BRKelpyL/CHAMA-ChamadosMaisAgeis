@@ -30,10 +30,12 @@ export class CreateSectorUseCase implements CreateSector {
         }
 
         const id = this.generateIdService.generate();
+        const deleted = false;
 
         const sector = new Sector({
             id,
             name,
+            deleted,
         });
 
         const createdSector = await this.createSectorRepository.save(sector);

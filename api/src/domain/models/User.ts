@@ -5,6 +5,7 @@ export type UserProps = {
     password: string;
     isAdmin: boolean;
     whatsapp?: string;
+    deleted: boolean;
 };
 
 export class User {
@@ -14,6 +15,7 @@ export class User {
     private readonly password: string;
     private readonly isAdmin: boolean;
     private readonly whatsapp?: string;
+    private readonly deleted: boolean;
 
     constructor(props: UserProps) {
         this.id = props.id;
@@ -22,6 +24,7 @@ export class User {
         this.password = props.password;
         this.isAdmin = props.isAdmin;
         this.whatsapp = props.whatsapp;
+        this.deleted = props.deleted;
     }
 
     public getId(): string {
@@ -46,5 +49,9 @@ export class User {
 
     public getWhatsapp(): string | undefined {
         return this.whatsapp;
+    }
+
+    public getDeleted(): boolean {
+        return this.deleted;
     }
 }

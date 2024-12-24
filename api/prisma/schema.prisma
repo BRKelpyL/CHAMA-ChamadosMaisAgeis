@@ -14,6 +14,7 @@ model User {
   password           String
   isAdmin            Boolean
   whatsapp           String?
+  deleted            Boolean
   UserToServiceOrder UserToServiceOrder[]
   UserToSector       UserToSector[]
 }
@@ -28,12 +29,14 @@ model ServiceOrder {
   createdAt          DateTime
   attributedAt       DateTime?
   closedAt           DateTime?
+  deleted            Boolean
   UserToServiceOrder UserToServiceOrder[]
 }
 
 model Sector {
   id           String         @id
   name         String         @unique
+  deleted      Boolean
   UserToSector UserToSector[]
   ServiceOrder ServiceOrder[]
 }
@@ -44,12 +47,14 @@ model UserToServiceOrder {
   userId         String
   serviceOrder   ServiceOrder @relation(fields: [serviceOrderId], references: [id])
   serviceOrderId String
+  deleted        Boolean
 }
 
 model UserToSector {
-  id       String @id
-  user     User   @relation(fields: [userId], references: [id])
+  id       String  @id
+  user     User    @relation(fields: [userId], references: [id])
   userId   String
-  sector   Sector @relation(fields: [sectorId], references: [id])
+  sector   Sector  @relation(fields: [sectorId], references: [id])
   sectorId String
+  deleted  Boolean
 }
