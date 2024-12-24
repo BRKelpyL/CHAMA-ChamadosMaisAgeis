@@ -1,2 +1,2 @@
-export * from "./controllers/User";
+export * from "./controllers";
 export * from "./http";

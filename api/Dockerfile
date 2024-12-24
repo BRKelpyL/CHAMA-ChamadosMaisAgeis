@@ -10,7 +10,7 @@ COPY . .
 # RUN rm -rf node_modules
 # RUN npm install
 
-CMD [ "npm", "run", "dev"]
+CMD [ "npm", "run", "dev" ]
 
 EXPOSE 4001
 # Lembre de trocar o valor em .env

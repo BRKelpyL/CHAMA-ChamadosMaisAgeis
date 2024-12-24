@@ -3,7 +3,7 @@ import {
     CreateUserRepository,
     LoadUserByNameRepository,
     LoadUserByEmailRepository,
-} from "../../../domain/repositories/user";
+} from "../../../domain/repositories/User";
 import {
     ConvertToHashService,
     CreateUser,

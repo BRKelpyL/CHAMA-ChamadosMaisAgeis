@@ -1,7 +1,7 @@
 import {
     DeleteUserByIdRepository,
     LoadUserByIdRepository,
-} from "../../../domain/repositories/user";
+} from "../../../domain/repositories/User";
 import {
     DeleteUserByIdInputDto,
     DeleteUserByIdOutputDto,

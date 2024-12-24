@@ -2,7 +2,7 @@ import { User } from "../../../domain/models";
 import {
     UpdateUserRepository,
     LoadUserByIdRepository,
-} from "../../../domain/repositories/user";
+} from "../../../domain/repositories/User";
 import {
     UpdateUserInputDto,
     UpdateUserOutputDto,
@@ -36,7 +36,9 @@ export class UpdateUserUseCase implements UpdateUser {
             }
         }
 
-        const userWithSameEmail = await this.loadUserByEmailRepository.load(email)
+        const userWithSameEmail = await this.loadUserByEmailRepository.load(
+            email
+        );
         if (userWithSameEmail) {
             if (userWithSameEmail.getId() !== id) {
                 return new Error(`Email ${email} is already in use`);

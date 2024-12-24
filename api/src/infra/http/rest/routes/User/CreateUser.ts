@@ -4,13 +4,13 @@ import {
     CreateUserPrismaRepository,
     LoadUserByEmailPrismaRepository,
     LoadUserByNamePrismaRepository,
-} from "../../../../database/repositories/User";
+} from "../../../../database/repositories";
 import { PrismaClient } from "@prisma/client";
 import {
     GenerateIdCryptoUuidService,
     ConvertToHashBcryptService,
 } from "../../../../services";
-import { CreateUserHttpController } from "../../../controllers/User";
+import { CreateUserHttpController } from "../../../controllers";
 
 export class CreateUserRoute {
     constructor(httpServer: ServerHttpRest, prismaClient: PrismaClient) {

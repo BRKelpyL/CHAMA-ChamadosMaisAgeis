@@ -1,20 +1,26 @@
+export type ServiceOrderStatus =
+    | "Aberto"
+    | "Em atendimento"
+    | "Solucionado"
+    | "Fechado";
+
 export type ServiceOrderProps = {
-    id: number;
+    id: string;
     title: string;
     description: string;
-    toSector: string;
-    status: string;
+    toSectorId: string;
+    status: ServiceOrderStatus;
     createdAt: Date;
     attibutedAt?: Date;
     closedAt?: Date;
 };
 
 export class ServiceOrder {
-    private readonly id: number;
+    private readonly id: string;
     private readonly title: string;
     private readonly description: string;
-    private readonly toSector: string;
-    private readonly status: string;
+    private readonly toSectorId: string;
+    private readonly status: ServiceOrderStatus;
     private readonly createdAt: Date;
     private readonly attibutedAt?: Date;
     private readonly closedAt?: Date;
@@ -23,14 +29,14 @@ export class ServiceOrder {
         this.id = props.id;
         this.title = props.title;
         this.description = props.description;
-        this.toSector = props.toSector;
+        this.toSectorId = props.toSectorId;
         this.status = props.status;
         this.createdAt = props.createdAt;
         this.attibutedAt = props.attibutedAt;
         this.closedAt = props.closedAt;
     }
 
-    public getId(): number {
+    public getId(): string {
         return this.id;
     }
 
@@ -42,11 +48,11 @@ export class ServiceOrder {
         return this.description;
     }
 
-    public getToSector(): string {
-        return this.toSector;
+    public getToSectorId(): string {
+        return this.toSectorId;
     }
 
-    public getStatus(): string {
+    public getStatus(): ServiceOrderStatus {
         return this.status;
     }
 

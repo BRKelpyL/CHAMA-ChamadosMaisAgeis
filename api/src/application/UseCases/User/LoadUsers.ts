@@ -1,5 +1,5 @@
 import { User } from "../../../domain/models";
-import { LoadUsersRepository } from "@/src/domain/repositories/user";
+import { LoadUsersRepository } from "@/src/domain/repositories/User";
 import {
     LoadUsersInputDto,
     LoadUsersOutputDto,

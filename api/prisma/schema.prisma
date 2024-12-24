@@ -33,7 +33,7 @@ model ServiceOrder {
 
 model Sector {
   id           String         @id
-  name         String
+  name         String         @unique
   UserToSector UserToSector[]
   ServiceOrder ServiceOrder[]
 }

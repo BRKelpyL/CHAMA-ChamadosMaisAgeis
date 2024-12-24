@@ -1,4 +1,4 @@
-import { LoadUserByIdRepository } from "../../../domain/repositories/user";
+import { LoadUserByIdRepository } from "../../../domain/repositories/User";
 import {
     LoadUserByIdInputDto,
     LoadUserByIdOutputDto,

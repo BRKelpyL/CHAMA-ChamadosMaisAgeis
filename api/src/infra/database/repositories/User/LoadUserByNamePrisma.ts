@@ -12,7 +12,7 @@ export class LoadUserByNamePrismaRepository
     }
 
     async load(name: string): Promise<User | undefined> {
-        const loadedUser = await this.prismaClient.user.findUnique({
+        const loadedUser = await this.prismaClient.user.findFirst({
             where: {
                 name,
             },
