@@ -14,6 +14,7 @@ export class CreateSectorPrismaRepository implements CreateSectorRepository {
             data: {
                 id: sector.getId(),
                 name: sector.getName(),
+                deleted: sector.getDeleted(),
             },
         });
 
@@ -24,6 +25,7 @@ export class CreateSectorPrismaRepository implements CreateSectorRepository {
         return new Sector({
             id: createdSector.id,
             name: createdSector.name,
+            deleted: createdSector.deleted,
         });
     }
 }

@@ -27,6 +27,7 @@ export class LoadSectorByNamePrismaRepository
         return new Sector({
             id: loadedSector.id,
             name: loadedSector.name,
+            deleted: loadedSector.deleted,
         });
     }
 }

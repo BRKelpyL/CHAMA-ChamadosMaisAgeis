@@ -7,6 +7,7 @@ export type DeleteSectorInputDto = {
 export type DeleteSectorOutputDto = {
     id: string;
     name: string;
+    deleted: boolean;
 };
 
 export interface DeleteSector

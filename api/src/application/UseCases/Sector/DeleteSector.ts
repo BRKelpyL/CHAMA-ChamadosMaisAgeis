@@ -33,6 +33,7 @@ export class DeleteSectorUseCase implements DeleteSector {
         return {
             id: deletedSector.getId(),
             name: deletedSector.getName(),
+            deleted: deletedSector.getDeleted(),
         };
     }
 }

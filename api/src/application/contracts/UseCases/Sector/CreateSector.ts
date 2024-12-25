@@ -7,6 +7,7 @@ export type CreateSectorInputDto = {
 export type CreateSectorOutputDto = {
     id: string;
     name: string;
+    deleted: boolean;
 };
 
 export interface CreateSector

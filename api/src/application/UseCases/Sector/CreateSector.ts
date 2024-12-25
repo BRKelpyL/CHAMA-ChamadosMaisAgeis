@@ -47,6 +47,7 @@ export class CreateSectorUseCase implements CreateSector {
         return {
             id: createdSector.getId(),
             name: createdSector.getName(),
+            deleted: createdSector.getDeleted(),
         };
     }
 }

@@ -26,6 +26,7 @@ export class DeleteSectorPrismaRepository implements DeleteSectorRepository {
         return new Sector({
             id: deletedSector.id,
             name: deletedSector.name,
+            deleted: deletedSector.deleted,
         });
     }
 }
