@@ -3,5 +3,5 @@ export * from "./LoadUsers";
 export * from "./LoadUserById";
 export * from "./LoadUserByName";
 export * from "./LoadUserByEmail";
-export * from "./DeleteUserById";
 export * from "./UpdateUser";
+export * from "./DeleteUserById";
