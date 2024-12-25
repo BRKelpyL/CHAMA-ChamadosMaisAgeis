@@ -31,6 +31,7 @@ export class LoadUserByEmailPrismaRepository
             password: loadedUser.password,
             isAdmin: loadedUser.isAdmin,
             whatsapp: loadedUser.whatsapp ?? undefined,
+            deleted: loadedUser.deleted,
         });
     }
 }

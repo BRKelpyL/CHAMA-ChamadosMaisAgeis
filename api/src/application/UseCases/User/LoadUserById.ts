@@ -27,6 +27,7 @@ export class LoadUserByIdUseCase implements LoadUserById {
             password: user.getPassword(),
             isAdmin: user.getIsAdmin(),
             whatsapp: user.getWhatsapp(),
+            deleted: user.getDeleted(),
         };
     }
 }

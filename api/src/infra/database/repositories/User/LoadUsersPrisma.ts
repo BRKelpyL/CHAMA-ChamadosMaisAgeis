@@ -21,6 +21,7 @@ export class LoadUsersPrismaRepository implements LoadUsersRepository {
                     password: user.password,
                     isAdmin: user.isAdmin,
                     whatsapp: user.whatsapp ?? undefined,
+                    deleted: user.deleted,
                 })
         );
         return userList;

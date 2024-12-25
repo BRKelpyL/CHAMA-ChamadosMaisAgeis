@@ -15,6 +15,7 @@ export type CreateUserHttpOutputDto = {
     password: string;
     isAdmin: boolean;
     whatsapp?: string;
+    deleted: boolean;
 };
 
 export interface CreateUserHttp

@@ -11,6 +11,7 @@ export type LoadUserByIdHttpOutputDto = {
     password: string;
     isAdmin: boolean;
     whatsapp?: string;
+    deleted: boolean;
 };
 
 export interface LoadUserByIdHttp

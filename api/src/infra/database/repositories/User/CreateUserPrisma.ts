@@ -20,6 +20,7 @@ export class CreateUserPrismaRepository implements CreateUserRepository {
                 password: user.getPassword(),
                 isAdmin: user.getIsAdmin(),
                 whatsapp: user.getWhatsapp(),
+                deleted: user.getDeleted(),
             },
         });
 
@@ -34,6 +35,7 @@ export class CreateUserPrismaRepository implements CreateUserRepository {
             password: createdUser.password,
             isAdmin: createdUser.isAdmin ?? false,
             whatsapp: createdUser.whatsapp ?? undefined,
+            deleted: createdUser.deleted,
         });
     }
 }

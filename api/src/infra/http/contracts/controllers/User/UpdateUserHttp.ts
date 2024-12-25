@@ -7,6 +7,7 @@ export type UpdateUserHttpInputDto = {
     password: string;
     isAdmin: boolean;
     whatsapp: string;
+    deleted: boolean;
 };
 
 export type UpdateUserHttpOutputDto = {

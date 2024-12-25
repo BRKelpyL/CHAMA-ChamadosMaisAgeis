@@ -23,6 +23,7 @@ export class LoadUsersUseCase implements LoadUsers {
                     password: user.getPassword(),
                     isAdmin: user.getIsAdmin(),
                     whatsapp: user.getWhatsapp(),
+                    deleted: user.getDeleted(),
                 };
             }),
         };

@@ -12,6 +12,7 @@ export class UpdateUserPrismaRepository implements UpdateUserRepository {
         const updatedUser = await this.prismaClient.user.update({
             where: {
                 id: user.getId(),
+                deleted: false,
             },
             data: {
                 name: user.getName(),
@@ -19,6 +20,7 @@ export class UpdateUserPrismaRepository implements UpdateUserRepository {
                 password: user.getPassword(),
                 isAdmin: user.getIsAdmin(),
                 whatsapp: user.getWhatsapp(),
+                deleted: user.getDeleted(),
             },
         });
 
@@ -33,6 +35,7 @@ export class UpdateUserPrismaRepository implements UpdateUserRepository {
             password: updatedUser.password,
             isAdmin: updatedUser.isAdmin,
             whatsapp: updatedUser.whatsapp ?? undefined,
+            deleted: updatedUser.deleted,
         });
     }
 }

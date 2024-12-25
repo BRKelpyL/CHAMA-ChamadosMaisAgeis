@@ -37,6 +37,7 @@ export class DeleteUserByIdUseCase implements DeleteUserById {
             password: deletedUser.getPassword(),
             isAdmin: deletedUser.getIsAdmin(),
             whatsapp: deletedUser.getWhatsapp(),
+            deleted: deletedUser.getDeleted(),
         };
     }
 }

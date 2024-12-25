@@ -32,6 +32,7 @@ export class DeleteUserByIdPrismaRepository
             password: deletedUser.password,
             isAdmin: deletedUser.isAdmin,
             whatsapp: deletedUser.whatsapp ?? undefined,
+            deleted: deletedUser.deleted,
         });
     }
 }

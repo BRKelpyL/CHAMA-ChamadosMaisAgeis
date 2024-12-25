@@ -76,6 +76,7 @@ export class CreateUserUseCase implements CreateUser {
             password: createdUser.getPassword(),
             isAdmin: createdUser.getIsAdmin(),
             whatsapp: createdUser.getWhatsapp(),
+            deleted: createdUser.getDeleted(),
         };
     }
 }

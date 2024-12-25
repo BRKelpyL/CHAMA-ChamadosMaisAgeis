@@ -10,6 +10,7 @@ export type LoadUsersOutputDto = {
         password: string;
         isAdmin: boolean;
         whatsapp?: string;
+        deleted: boolean;
     }[];
 };
 

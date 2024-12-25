@@ -45,6 +45,8 @@ export class UpdateUserUseCase implements UpdateUser {
             }
         }
 
+        const deleted = false;
+
         const user = new User({
             id,
             name,
@@ -52,6 +54,7 @@ export class UpdateUserUseCase implements UpdateUser {
             password,
             isAdmin,
             whatsapp,
+            deleted,
         });
 
         const updatedUser = await this.updateUserRepository.update(user);
@@ -67,6 +70,7 @@ export class UpdateUserUseCase implements UpdateUser {
             password: updatedUser.getPassword(),
             isAdmin: updatedUser.getIsAdmin(),
             whatsapp: updatedUser.getWhatsapp(),
+            deleted: updatedUser.getDeleted(),
         };
     }
 }
