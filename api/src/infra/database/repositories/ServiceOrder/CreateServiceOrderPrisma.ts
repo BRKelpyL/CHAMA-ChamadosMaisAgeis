@@ -26,6 +26,7 @@ export class CreateServiceOrderPrismaRepository
                 createdAt: serviceOrder.getCreatedAt(),
                 attributedAt: serviceOrder.getAttributedAt(),
                 closedAt: serviceOrder.getClosedAt(),
+                deleted: serviceOrder.getDeleted(),
             },
         });
 
@@ -42,6 +43,7 @@ export class CreateServiceOrderPrismaRepository
             createdAt: createdServiceOrder.createdAt,
             attibutedAt: createdServiceOrder.attributedAt ?? undefined,
             closedAt: createdServiceOrder.closedAt ?? undefined,
+            deleted: createdServiceOrder.deleted,
         });
     }
 }
