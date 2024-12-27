@@ -10,6 +10,7 @@ import {
 import {
     CreateSectorRoute,
     LoadSectorsRoute,
+    LoadSectorByIdRoute,
     DeleteSectorRoute,
 } from "../routes/Sector";
 import { CreateServiceOrderRoute } from "../routes/ServiceOrder";
@@ -31,6 +32,7 @@ export async function startServer(props: StartServerProps): Promise<void> {
 
     new CreateSectorRoute(serverHttpRest, prismaClient);
     new LoadSectorsRoute(serverHttpRest, prismaClient);
+    new LoadSectorByIdRoute(serverHttpRest, prismaClient);
     new DeleteSectorRoute(serverHttpRest, prismaClient);
 
     new CreateServiceOrderRoute(serverHttpRest, prismaClient);
