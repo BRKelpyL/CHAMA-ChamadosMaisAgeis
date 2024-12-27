@@ -10,7 +10,11 @@ export class LoadSectorsPrismaRepository implements LoadSectorsRepository {
     }
 
     public async load(): Promise<Sector[]> {
-        const sectors = await this.prismaClient.sector.findMany();
+        const sectors = await this.prismaClient.sector.findMany({
+            where: {
+                deleted: false,
+            },
+        });
 
         const sectorList = sectors.map(
             (sector) =>
