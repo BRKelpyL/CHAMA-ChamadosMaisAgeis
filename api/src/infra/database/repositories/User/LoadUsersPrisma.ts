@@ -10,7 +10,11 @@ export class LoadUsersPrismaRepository implements LoadUsersRepository {
     }
 
     public async load(): Promise<User[]> {
-        const users = await this.prismaClient.user.findMany();
+        const users = await this.prismaClient.user.findMany({
+            where: {
+                deleted: false,
+            },
+        });
 
         const userList = users.map(
             (user) =>
