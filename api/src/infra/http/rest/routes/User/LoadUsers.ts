@@ -14,6 +14,6 @@ export class LoadUsersRoute {
             loadUsersUseCase
         );
 
-        httpServer.on("get", "/user/getAll", LoadUserHttpController);
+        httpServer.on("get", "/user/getActive", LoadUserHttpController);
     }
 }
