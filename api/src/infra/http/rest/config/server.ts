@@ -3,6 +3,7 @@ import { ServerHttpRest } from "../contracts";
 import {
     CreateUserRoute,
     DeleteUserByIdRoute,
+    LoadDeletedUsersRoute,
     LoadUserByIdRoute,
     LoadUsersRoute,
     UpdateUserRoute,
@@ -27,6 +28,7 @@ export async function startServer(props: StartServerProps): Promise<void> {
     new CreateUserRoute(serverHttpRest, prismaClient);
     new LoadUsersRoute(serverHttpRest, prismaClient);
     new LoadUserByIdRoute(serverHttpRest, prismaClient);
+    new LoadDeletedUsersRoute(serverHttpRest, prismaClient);
     new UpdateUserRoute(serverHttpRest, prismaClient);
     new DeleteUserByIdRoute(serverHttpRest, prismaClient);
 
