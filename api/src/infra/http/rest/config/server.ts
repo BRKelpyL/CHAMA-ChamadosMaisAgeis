@@ -5,7 +5,7 @@ import {
     DeleteUserByIdRoute,
     LoadDeletedUsersRoute,
     LoadUserByIdRoute,
-    LoadUsersRoute,
+    LoadActiveUsersRoute,
     UpdateUserRoute,
 } from "../routes/User";
 import {
@@ -26,7 +26,7 @@ export async function startServer(props: StartServerProps): Promise<void> {
     const { serverHttpRest, port } = props;
 
     new CreateUserRoute(serverHttpRest, prismaClient);
-    new LoadUsersRoute(serverHttpRest, prismaClient);
+    new LoadActiveUsersRoute(serverHttpRest, prismaClient);
     new LoadUserByIdRoute(serverHttpRest, prismaClient);
     new LoadDeletedUsersRoute(serverHttpRest, prismaClient);
     new UpdateUserRoute(serverHttpRest, prismaClient);

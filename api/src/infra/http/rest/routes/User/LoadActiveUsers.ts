@@ -4,7 +4,7 @@ import { LoadUsersPrismaRepository } from "../../../../database/repositories";
 import { LoadUsersHttpController } from "../../../controllers/User";
 import { ServerHttpRest } from "../../contracts";
 
-export class LoadUsersRoute {
+export class LoadActiveUsersRoute {
     constructor(httpServer: ServerHttpRest, prismaClient: PrismaClient) {
         const loadUserPrismaRepository =
             LoadUsersPrismaRepository.create(prismaClient);
