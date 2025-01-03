@@ -13,7 +13,6 @@ export class LoadUserByIdPrismaRepository implements LoadUserByIdRepository {
         const loadedUser = await this.prismaClient.user.findUnique({
             where: {
                 id,
-                deleted: false,
             },
         });
 
