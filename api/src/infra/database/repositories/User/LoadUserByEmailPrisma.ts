@@ -14,7 +14,7 @@ export class LoadUserByEmailPrismaRepository
     }
 
     async load(email: string): Promise<User | undefined> {
-        const loadedUser = await this.prismaClient.user.findUnique({
+        const loadedUser = await this.prismaClient.user.findFirst({
             where: {
                 email,
             },

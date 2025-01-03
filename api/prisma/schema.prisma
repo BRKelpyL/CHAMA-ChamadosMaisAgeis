@@ -9,8 +9,8 @@ datasource db {
 
 model User {
   id                 String               @id
-  name               String               @unique
-  email              String               @unique
+  name               String
+  email              String
   password           String
   isAdmin            Boolean
   whatsapp           String?
@@ -35,7 +35,7 @@ model ServiceOrder {
 
 model Sector {
   id           String         @id
-  name         String         @unique
+  name         String
   deleted      Boolean
   UserToSector UserToSector[]
   ServiceOrder ServiceOrder[]
