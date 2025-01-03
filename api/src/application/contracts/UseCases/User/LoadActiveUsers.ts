@@ -1,8 +1,8 @@
 import { UseCase } from "../UseCase";
 
-export type LoadUsersInputDto = void;
+export type LoadActiveUsersInputDto = void;
 
-export type LoadUsersOutputDto = {
+export type LoadActiveUsersOutputDto = {
     users: {
         id: string;
         name: string;
@@ -14,5 +14,8 @@ export type LoadUsersOutputDto = {
     }[];
 };
 
-export interface LoadUsers
-    extends UseCase<LoadUsersInputDto, LoadUsersOutputDto | Error> {}
+export interface LoadActiveUsers
+    extends UseCase<
+        LoadActiveUsersInputDto,
+        LoadActiveUsersOutputDto | Error
+    > {}

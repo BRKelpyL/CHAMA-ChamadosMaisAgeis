@@ -1,19 +1,21 @@
 import { PrismaClient } from "@prisma/client";
-import { LoadUsersUseCase } from "../../../../../application/UseCases";
-import { LoadUsersPrismaRepository } from "../../../../database/repositories";
-import { LoadUsersHttpController } from "../../../controllers/User";
+import { LoadActiveUsersUseCase } from "../../../../../application/UseCases";
+import { LoadActiveUsersPrismaRepository } from "../../../../database/repositories";
+import { LoadActiveUsersHttpController } from "../../../controllers/User";
 import { ServerHttpRest } from "../../contracts";
 
 export class LoadActiveUsersRoute {
     constructor(httpServer: ServerHttpRest, prismaClient: PrismaClient) {
         const loadUserPrismaRepository =
-            LoadUsersPrismaRepository.create(prismaClient);
+            LoadActiveUsersPrismaRepository.create(prismaClient);
 
-        const loadUsersUseCase = new LoadUsersUseCase(loadUserPrismaRepository);
-        const LoadUserHttpController = new LoadUsersHttpController(
-            loadUsersUseCase
+        const loadActiveUsersUseCase = new LoadActiveUsersUseCase(
+            loadUserPrismaRepository
+        );
+        const LoadActiveUserHttpController = new LoadActiveUsersHttpController(
+            loadActiveUsersUseCase
         );
 
-        httpServer.on("get", "/user/getActive", LoadUserHttpController);
+        httpServer.on("get", "/user/getActive", LoadActiveUserHttpController);
     }
 }

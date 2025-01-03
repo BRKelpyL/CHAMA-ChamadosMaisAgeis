@@ -1,6 +1,6 @@
 export * from "./CreateUser";
 export * from "./LoadAllUsers";
-export * from "./LoadUsers";
+export * from "./LoadActiveUsers";
 export * from "./LoadUserById";
 export * from "./LoadDeletedUsers";
 export * from "./DeleteUserById";

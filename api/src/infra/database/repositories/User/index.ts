@@ -1,6 +1,6 @@
 export * from "./CreateUserPrisma";
 export * from "./LoadAllUsersPrisma";
-export * from "./LoadUsersPrisma";
+export * from "./LoadActiveUsersPrisma";
 export * from "./LoadUserByIdPrisma";
 export * from "./LoadUserByNamePrisma";
 export * from "./LoadUserByEmailPrisma";

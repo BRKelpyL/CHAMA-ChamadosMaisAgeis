@@ -1,17 +1,19 @@
 import { User } from "../../../domain/models";
-import { LoadUsersRepository } from "../../../domain/repositories/User";
+import { LoadActiveUsersRepository } from "../../../domain/repositories/User";
 import {
-    LoadUsersInputDto,
-    LoadUsersOutputDto,
-    LoadUsers,
+    LoadActiveUsersInputDto,
+    LoadActiveUsersOutputDto,
+    LoadActiveUsers,
 } from "../../contracts";
 
-export class LoadUsersUseCase implements LoadUsers {
-    constructor(private readonly loadUsersRepository: LoadUsersRepository) {}
+export class LoadActiveUsersUseCase implements LoadActiveUsers {
+    constructor(
+        private readonly loadUsersRepository: LoadActiveUsersRepository
+    ) {}
 
     public async execute(
-        input: LoadUsersInputDto
-    ): Promise<LoadUsersOutputDto> {
+        input: LoadActiveUsersInputDto
+    ): Promise<LoadActiveUsersOutputDto> {
         const users: User[] = await this.loadUsersRepository.load();
 
         return {

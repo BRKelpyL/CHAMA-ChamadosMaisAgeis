@@ -1,5 +1,5 @@
 import { User } from "../../models";
 
-export interface LoadUsersRepository {
+export interface LoadActiveUsersRepository {
     load: () => Promise<User[]>;
 }

@@ -1,8 +1,8 @@
 import { HttpController } from "../Controller";
 
-export type LoadUsersHttpInputDto = void;
+export type LoadActiveUsersHttpInputDto = void;
 
-export type LoadUserHttpOutputDto = {
+export type LoadActiveUserHttpOutputDto = {
     users: {
         id: string;
         name: string;
@@ -14,8 +14,8 @@ export type LoadUserHttpOutputDto = {
     }[];
 };
 
-export interface LoadUsersHttp
+export interface LoadActiveUsersHttp
     extends HttpController<
-        LoadUsersHttpInputDto,
-        LoadUserHttpOutputDto | Error
+        LoadActiveUsersHttpInputDto,
+        LoadActiveUserHttpOutputDto | Error
     > {}
