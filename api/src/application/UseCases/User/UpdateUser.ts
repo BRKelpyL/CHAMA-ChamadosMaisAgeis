@@ -22,30 +22,61 @@ export class UpdateUserUseCase implements UpdateUser {
     public async execute(
         input: UpdateUserInputDto
     ): Promise<UpdateUserOutputDto | Error> {
-        let { id, name, email, password, isAdmin, whatsapp } = input;
+        let { id, name, email, password, isAdmin, whatsapp, deleted } = input;
+
+        let userWithSameName;
+        let userWithSameEmail;
 
         const loadedUser = await this.loadUserByIdRepository.load(id);
         if (!loadedUser) {
             return new Error(`User ${id} not found`);
         }
 
-        const userWithSameName = await this.loadUserByNameRepository.load(name);
-        if (userWithSameName) {
-            if (userWithSameName.getId() !== id) {
-                return new Error(`Name ${name} is already in use`);
+        if (name) {
+            userWithSameName = await this.loadUserByNameRepository.load(name);
+            if (userWithSameName) {
+                if (userWithSameName.getId() !== id) {
+                    return new Error(`Name ${name} is already in use`);
+                }
+            }
+        } else {
+            name = loadedUser.getName();
+        }
+
+        if (email) {
+            userWithSameEmail = await this.loadUserByEmailRepository.load(
+                email
+            );
+            if (userWithSameEmail) {
+                if (userWithSameEmail.getId() !== id) {
+                    return new Error(`Email ${email} is already in use`);
+                }
+            }
+        } else {
+            email = loadedUser.getEmail();
+        }
+
+        if (password) {
+            password = await this.convertToHashService.convert(password);
+        } else {
+            password = loadedUser.getPassword();
+        }
+
+        if (!isAdmin) {
+            isAdmin = loadedUser.getIsAdmin();
+        }
+
+        if (!whatsapp) {
+            if (typeof loadedUser.getWhatsapp() === "string") {
+                whatsapp = loadedUser.getWhatsapp();
+            } else {
+                whatsapp = undefined;
             }
         }
 
-        const userWithSameEmail = await this.loadUserByEmailRepository.load(
-            email
-        );
-        if (userWithSameEmail) {
-            if (userWithSameEmail.getId() !== id) {
-                return new Error(`Email ${email} is already in use`);
-            }
+        if (!deleted) {
+            deleted = loadedUser.getDeleted();
         }
-
-        const deleted = false;
 
         const user = new User({
             id,

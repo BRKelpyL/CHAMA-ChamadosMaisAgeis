@@ -2,12 +2,12 @@ import { HttpController } from "../Controller";
 
 export type UpdateUserHttpInputDto = {
     id: string;
-    name: string;
-    email: string;
-    password: string;
-    isAdmin: boolean;
-    whatsapp: string;
-    deleted: boolean;
+    name?: string;
+    email?: string;
+    password?: string;
+    isAdmin?: boolean;
+    whatsapp?: string;
+    deleted?: boolean;
 };
 
 export type UpdateUserHttpOutputDto = {
@@ -17,6 +17,7 @@ export type UpdateUserHttpOutputDto = {
     password: string;
     isAdmin: boolean;
     whatsapp?: string;
+    deleted: boolean;
 };
 
 export interface UpdateUserHttp
