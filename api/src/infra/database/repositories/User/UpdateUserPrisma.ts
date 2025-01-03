@@ -12,7 +12,6 @@ export class UpdateUserPrismaRepository implements UpdateUserRepository {
         const updatedUser = await this.prismaClient.user.update({
             where: {
                 id: user.getId(),
-                deleted: false,
             },
             data: {
                 name: user.getName(),
