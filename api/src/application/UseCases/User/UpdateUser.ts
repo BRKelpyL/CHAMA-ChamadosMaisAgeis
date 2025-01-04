@@ -22,10 +22,9 @@ export class UpdateUserUseCase implements UpdateUser {
     public async execute(
         input: UpdateUserInputDto
     ): Promise<UpdateUserOutputDto | Error> {
-        let { id, name, email, password, isAdmin, whatsapp, deleted } = input;
+        const { id, name, email, password, isAdmin, whatsapp, deleted } = input;
 
-        let userWithSameName;
-        let userWithSameEmail;
+        let hashedPassword;
 
         const loadedUser = await this.loadUserByIdRepository.load(id);
         if (!loadedUser) {
@@ -33,59 +32,35 @@ export class UpdateUserUseCase implements UpdateUser {
         }
 
         if (name) {
-            userWithSameName = await this.loadUserByNameRepository.load(name);
-            if (userWithSameName) {
-                if (userWithSameName.getId() !== id) {
-                    return new Error(`Name ${name} is already in use`);
-                }
+            const userWithSameName = await this.loadUserByNameRepository.load(
+                name
+            );
+            if (userWithSameName && userWithSameName.getId() !== id) {
+                return new Error(`Name ${name} is already in use`);
             }
-        } else {
-            name = loadedUser.getName();
         }
 
         if (email) {
-            userWithSameEmail = await this.loadUserByEmailRepository.load(
+            const userWithSameEmail = await this.loadUserByEmailRepository.load(
                 email
             );
-            if (userWithSameEmail) {
-                if (userWithSameEmail.getId() !== id) {
-                    return new Error(`Email ${email} is already in use`);
-                }
+            if (userWithSameEmail && userWithSameEmail.getId() !== id) {
+                return new Error(`Email ${email} is already in use`);
             }
-        } else {
-            email = loadedUser.getEmail();
         }
 
         if (password) {
-            password = await this.convertToHashService.convert(password);
-        } else {
-            password = loadedUser.getPassword();
-        }
-
-        if (!isAdmin) {
-            isAdmin = loadedUser.getIsAdmin();
-        }
-
-        if (!whatsapp) {
-            if (typeof loadedUser.getWhatsapp() === "string") {
-                whatsapp = loadedUser.getWhatsapp();
-            } else {
-                whatsapp = undefined;
-            }
-        }
-
-        if (!deleted) {
-            deleted = loadedUser.getDeleted();
+            hashedPassword = await this.convertToHashService.convert(password);
         }
 
         const user = new User({
             id,
-            name,
-            email,
-            password,
-            isAdmin,
-            whatsapp,
-            deleted,
+            name: name ?? loadedUser.getName(),
+            email: email ?? loadedUser.getEmail(),
+            password: hashedPassword ?? loadedUser.getPassword(),
+            isAdmin: isAdmin ?? loadedUser.getIsAdmin(),
+            whatsapp: whatsapp ?? loadedUser.getWhatsapp(),
+            deleted: deleted ?? loadedUser.getDeleted(),
         });
 
         const updatedUser = await this.updateUserRepository.update(user);

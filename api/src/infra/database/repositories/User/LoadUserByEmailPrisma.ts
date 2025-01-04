@@ -17,6 +17,7 @@ export class LoadUserByEmailPrismaRepository
         const loadedUser = await this.prismaClient.user.findFirst({
             where: {
                 email,
+                deleted: false,
             },
         });
 
