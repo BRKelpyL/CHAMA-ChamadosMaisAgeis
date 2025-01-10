@@ -5,3 +5,4 @@ export * from "./LoadUserByIdHttp";
 export * from "./LoadDeletedUsersHttp";
 export * from "./DeleteUserHttp";
 export * from "./UpdateUserHttp";
+export * from "./LoginHttp";

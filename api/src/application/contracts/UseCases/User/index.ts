@@ -6,3 +6,4 @@ export * from "./LoadUserById";
 export * from "./LoadDeletedUsers";
 export * from "./UpdateUser";
 export * from "./DeleteUserById";
+export * from "./Login";

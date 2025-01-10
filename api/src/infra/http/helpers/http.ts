@@ -6,7 +6,7 @@ export const badRequest = (error: Error): HttpResponse<Error> => ({
     body: error,
 });
 
-export const sucess = <T = Record<string, any>>(data: T): HttpResponse<T> => ({
+export const success = <T = Record<string, any>>(data: T): HttpResponse<T> => ({
     statusCode: 200,
     body: data,
 });

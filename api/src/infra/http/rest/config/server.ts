@@ -8,6 +8,7 @@ import {
     LoadActiveUsersRoute,
     UpdateUserRoute,
     LoadAllUsersRoute,
+    LoginRoute,
 } from "../routes/User";
 import {
     CreateSectorRoute,
@@ -33,6 +34,7 @@ export async function startServer(props: StartServerProps): Promise<void> {
     new LoadDeletedUsersRoute(serverHttpRest, prismaClient);
     new UpdateUserRoute(serverHttpRest, prismaClient);
     new DeleteUserByIdRoute(serverHttpRest, prismaClient);
+    new LoginRoute(serverHttpRest, prismaClient);
 
     new CreateSectorRoute(serverHttpRest, prismaClient);
     new LoadSectorsRoute(serverHttpRest, prismaClient);
