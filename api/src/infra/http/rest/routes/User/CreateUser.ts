@@ -1,4 +1,7 @@
-import { CreateUserUseCase } from "../../../../../application/UseCases";
+import {
+    CreateUserUseCase,
+    AuthUserUseCase,
+} from "../../../../../application/UseCases";
 import { ServerHttpRest } from "../../contracts";
 import {
     CreateUserPrismaRepository,
@@ -9,8 +12,10 @@ import { PrismaClient } from "@prisma/client";
 import {
     GenerateIdCryptoUuidService,
     ConvertToHashBcryptService,
+    ExtractInfoFromTokenJwtService,
 } from "../../../../services";
 import { CreateUserHttpController } from "../../../controllers";
+import { AuthUserHttpMiddleware } from "../../../middlewares";
 
 export class CreateUserRoute {
     constructor(httpServer: ServerHttpRest, prismaClient: PrismaClient) {
@@ -22,6 +27,8 @@ export class CreateUserRoute {
             LoadUserByEmailPrismaRepository.create(prismaClient);
         const generateIdCriptoUuid = new GenerateIdCryptoUuidService();
         const convertToHash = new ConvertToHashBcryptService();
+        const extractInfoFromTokenJwtService =
+            new ExtractInfoFromTokenJwtService();
 
         const createUserUseCase = new CreateUserUseCase(
             createUserPrismaRepository,
@@ -33,6 +40,19 @@ export class CreateUserRoute {
         const createUserHttpController = new CreateUserHttpController(
             createUserUseCase
         );
-        httpServer.on("post", "/user/create", createUserHttpController);
+
+        const authUserUseCase = new AuthUserUseCase(
+            extractInfoFromTokenJwtService
+        );
+        const authUserHttpMiddleware = new AuthUserHttpMiddleware(
+            authUserUseCase
+        );
+
+        httpServer.on(
+            "post",
+            "/user/create",
+            createUserHttpController,
+            authUserHttpMiddleware
+        );
     }
 }

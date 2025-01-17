@@ -1,6 +1,6 @@
 import { HttpController } from "../Controller";
 
-export type LoginHttpInputDto = {
+export type LoginHttpInputDto = Record<string, any> & {
     email: string;
     password: string;
 };

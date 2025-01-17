@@ -1,8 +1,13 @@
 import { PrismaClient } from "@prisma/client";
-import { LoadDeletedUsersUseCase } from "../../../../../application/UseCases";
+import {
+    AuthUserUseCase,
+    LoadDeletedUsersUseCase,
+} from "../../../../../application/UseCases";
 import { LoadDeletedUsersPrismaRepository } from "../../../../database/repositories";
 import { LoadDeletedUsersHttpController } from "../../../controllers/User";
 import { ServerHttpRest } from "../../contracts";
+import { AuthUserHttpMiddleware } from "../../../middlewares";
+import { ExtractInfoFromTokenJwtService } from "../../../../services";
 
 export class LoadDeletedUsersRoute {
     constructor(httpServer: ServerHttpRest, prismaClient: PrismaClient) {
@@ -14,10 +19,20 @@ export class LoadDeletedUsersRoute {
         const loadDeletedUsersHttpController =
             new LoadDeletedUsersHttpController(loadUsersUseCase);
 
+        const extractInfoFromTokenJwtService =
+            new ExtractInfoFromTokenJwtService();
+        const authUserUseCase = new AuthUserUseCase(
+            extractInfoFromTokenJwtService
+        );
+        const authUserHttpMiddleware = new AuthUserHttpMiddleware(
+            authUserUseCase
+        );
+
         httpServer.on(
             "get",
             "/user/getDeleted",
-            loadDeletedUsersHttpController
+            loadDeletedUsersHttpController,
+            authUserHttpMiddleware
         );
     }
 }

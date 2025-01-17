@@ -15,6 +15,7 @@ export class GenerateTokenJwtService implements GenerateTokenService {
                 expiresIn: "12h",
             }
         );
+
         return token;
     }
 }

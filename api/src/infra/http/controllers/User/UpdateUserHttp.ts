@@ -5,7 +5,7 @@ import {
     UpdateUserHttpOutputDto,
     HttpResponse,
 } from "../..";
-import { badRequest, serverError, sucess, unknownError } from "../../helpers";
+import { badRequest, serverError, success, unknownError } from "../../helpers";
 import { MissingParamError } from "../../errors";
 
 export class UpdateUserHttpController implements UpdateUserHttp {
@@ -26,7 +26,7 @@ export class UpdateUserHttpController implements UpdateUserHttp {
                 return badRequest(updatedUser);
             }
 
-            return sucess<UpdateUserHttpOutputDto>(updatedUser);
+            return success<UpdateUserHttpOutputDto>(updatedUser);
         } catch (error) {
             const isError = error instanceof Error;
             if (!isError) return unknownError(error);

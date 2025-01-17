@@ -1,11 +1,16 @@
-import { DeleteUserByIdUseCase } from "../../../../../application/UseCases";
+import {
+    AuthUserUseCase,
+    DeleteUserByIdUseCase,
+} from "../../../../../application/UseCases";
 import { ServerHttpRest } from "../../contracts";
 import {
     DeleteUserByIdPrismaRepository,
     LoadUserByIdPrismaRepository,
 } from "../../../../database/repositories";
 import { PrismaClient } from "@prisma/client";
-import { DeleteUserByIdHttpController } from "../../../controllers/User";
+import { DeleteUserByIdHttpController } from "../../../controllers";
+import { ExtractInfoFromTokenJwtService } from "../../../../services";
+import { AuthUserHttpMiddleware } from "../../../middlewares";
 
 export class DeleteUserByIdRoute {
     constructor(httpServer: ServerHttpRest, prismaClient: PrismaClient) {
@@ -20,6 +25,21 @@ export class DeleteUserByIdRoute {
         const deleteUserByIdHttpController = new DeleteUserByIdHttpController(
             deleteUserByIdUseCase
         );
-        httpServer.on("delete", "/user/delete", deleteUserByIdHttpController);
+
+        const extractInfoFromTokenJwtService =
+            new ExtractInfoFromTokenJwtService();
+        const authUserUseCase = new AuthUserUseCase(
+            extractInfoFromTokenJwtService
+        );
+        const authUserHttpMiddleware = new AuthUserHttpMiddleware(
+            authUserUseCase
+        );
+
+        httpServer.on(
+            "delete",
+            "/user/delete",
+            deleteUserByIdHttpController,
+            authUserHttpMiddleware
+        );
     }
 }

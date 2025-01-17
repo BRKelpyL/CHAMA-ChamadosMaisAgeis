@@ -1,6 +1,8 @@
 import { HttpController } from "../Controller";
 
 export type CreateUserHttpInputDto = {
+    authenticatedUserId: string;
+    authenticatedUserRole: string;
     name: string;
     email: string;
     password: string;

@@ -24,7 +24,18 @@ export class CreateUserUseCase implements CreateUser {
     public async execute(
         input: CreateUserInputDto
     ): Promise<CreateUserOutputDto | Error> {
-        const { name, email, password, isAdmin, whatsapp } = input;
+        const {
+            authenticatedUserRole,
+            name,
+            email,
+            password,
+            isAdmin,
+            whatsapp,
+        } = input;
+
+        if (authenticatedUserRole !== "admin") {
+            return new Error("You must be an admin to create a user");
+        }
 
         const userWithSameName = await this.loadUserByNameRepository.load(name);
         if (userWithSameName) {

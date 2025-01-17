@@ -1,8 +1,13 @@
 import { ServerHttpRest } from "../../contracts";
 import { PrismaClient } from "@prisma/client";
-import { LoadUserByIdUseCase } from "../../../../../application/UseCases";
+import {
+    AuthUserUseCase,
+    LoadUserByIdUseCase,
+} from "../../../../../application/UseCases";
 import { LoadUserByIdPrismaRepository } from "../../../../database/repositories";
-import { LoadUserByIdHttpController } from "../../../controllers/User";
+import { LoadUserByIdHttpController } from "../../../controllers";
+import { AuthUserHttpMiddleware } from "../../../middlewares";
+import { ExtractInfoFromTokenJwtService } from "../../../../services";
 
 export class LoadUserByIdRoute {
     constructor(httpServer: ServerHttpRest, prismaClient: PrismaClient) {
@@ -14,6 +19,21 @@ export class LoadUserByIdRoute {
         const loadUserByIdHttpController = new LoadUserByIdHttpController(
             loadUserByIdUseCase
         );
-        httpServer.on("get", "/user/getOne", loadUserByIdHttpController);
+
+        const extractInfoFromTokenJwtService =
+            new ExtractInfoFromTokenJwtService();
+        const authUserUseCase = new AuthUserUseCase(
+            extractInfoFromTokenJwtService
+        );
+        const authUserHttpMiddleware = new AuthUserHttpMiddleware(
+            authUserUseCase
+        );
+
+        httpServer.on(
+            "post",
+            "/user/getOne",
+            loadUserByIdHttpController,
+            authUserHttpMiddleware
+        );
     }
 }

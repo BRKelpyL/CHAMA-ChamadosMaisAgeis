@@ -1,6 +1,8 @@
 import { UseCase } from "../UseCase";
 
 export type CreateUserInputDto = {
+    authenticatedUserId: string;
+    authenticatedUserRole: string;
     name: string;
     email: string;
     password: string;

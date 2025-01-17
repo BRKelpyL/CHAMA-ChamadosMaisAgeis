@@ -5,7 +5,7 @@ import {
     LoadSectorsHttpOutputDto,
     HttpResponse,
 } from "../..";
-import { badRequest, serverError, sucess, unknownError } from "../../helpers";
+import { badRequest, serverError, success, unknownError } from "../../helpers";
 
 export class LoadSectorsHttpController implements LoadSectorsHttp {
     constructor(private readonly loadSectors: LoadSectors) {}
@@ -19,7 +19,7 @@ export class LoadSectorsHttpController implements LoadSectorsHttp {
                 return badRequest(sectors);
             }
 
-            return sucess<LoadSectorsHttpOutputDto>(sectors);
+            return success<LoadSectorsHttpOutputDto>(sectors);
         } catch (error) {
             const isError = error instanceof Error;
             if (!isError) return unknownError(error);

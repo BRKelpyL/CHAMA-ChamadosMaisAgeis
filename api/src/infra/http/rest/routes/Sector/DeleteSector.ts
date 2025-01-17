@@ -1,4 +1,7 @@
-import { DeleteSectorUseCase } from "../../../../../application/UseCases";
+import {
+    AuthUserUseCase,
+    DeleteSectorUseCase,
+} from "../../../../../application/UseCases";
 import { ServerHttpRest } from "../../contracts";
 import {
     DeleteSectorPrismaRepository,
@@ -6,6 +9,8 @@ import {
 } from "../../../../database/repositories";
 import { PrismaClient } from "@prisma/client";
 import { DeleteSectorHttpController } from "../../../controllers";
+import { AuthUserHttpMiddleware } from "../../../middlewares";
+import { ExtractInfoFromTokenJwtService } from "../../../../services";
 
 export class DeleteSectorRoute {
     constructor(server: ServerHttpRest, prismaClient: PrismaClient) {
@@ -21,6 +26,22 @@ export class DeleteSectorRoute {
         const deleteSectorHttpController = new DeleteSectorHttpController(
             deleteSectorUseCase
         );
-        server.on("delete", "/sector/delete", deleteSectorHttpController);
+
+        const extractInfoFromTokenJwtService =
+            new ExtractInfoFromTokenJwtService();
+
+        const authUserUseCase = new AuthUserUseCase(
+            extractInfoFromTokenJwtService
+        );
+        const authUserHttpMiddleware = new AuthUserHttpMiddleware(
+            authUserUseCase
+        );
+
+        server.on(
+            "delete",
+            "/sector/delete",
+            deleteSectorHttpController,
+            authUserHttpMiddleware
+        );
     }
 }

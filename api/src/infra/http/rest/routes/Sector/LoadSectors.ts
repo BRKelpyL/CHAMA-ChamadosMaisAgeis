@@ -14,6 +14,6 @@ export class LoadSectorsRoute {
         const loadSectorsHttpController = new LoadSectorsHttpController(
             loadSectorsUseCase
         );
-        server.on("get", "/sector/getAll", loadSectorsHttpController);
+        server.on("get", "/sector/getActive", loadSectorsHttpController);
     }
 }

@@ -47,6 +47,7 @@ model UserToServiceOrder {
   userId         String
   serviceOrder   ServiceOrder @relation(fields: [serviceOrderId], references: [id])
   serviceOrderId String
+  relation       String
   deleted        Boolean
 }
 

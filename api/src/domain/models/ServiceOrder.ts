@@ -1,8 +1,4 @@
-export type ServiceOrderStatus =
-    | "Aberto"
-    | "Em atendimento"
-    | "Solucionado"
-    | "Fechado";
+export type ServiceOrderStatus = "Aberto" | "Em atendimento" | "Fechado";
 
 export type ServiceOrderProps = {
     id: string;

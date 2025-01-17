@@ -5,7 +5,7 @@ import {
     LoadAllUsersHttpOutputDto,
     HttpResponse,
 } from "../..";
-import { badRequest, serverError, sucess, unknownError } from "../../helpers";
+import { badRequest, serverError, success, unknownError } from "../../helpers";
 
 export class LoadAllUsersHttpController implements LoadAllUsersHttp {
     constructor(private loadAllUsers: LoadAllUsers) {}
@@ -20,7 +20,7 @@ export class LoadAllUsersHttpController implements LoadAllUsersHttp {
                 return badRequest(users);
             }
 
-            return sucess<LoadAllUsersHttpOutputDto>(users);
+            return success<LoadAllUsersHttpOutputDto>(users);
         } catch (error) {
             const isError = error instanceof Error;
             if (!isError) return unknownError(error);

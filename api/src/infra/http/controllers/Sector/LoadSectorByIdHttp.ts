@@ -6,7 +6,7 @@ import {
     MissingParamError,
     LoadSectorByIdHttpOutputDto,
 } from "../..";
-import { badRequest, serverError, sucess, unknownError } from "../../helpers";
+import { badRequest, serverError, success, unknownError } from "../../helpers";
 
 export class LoadSectorByIdHttpController implements LoadSectorByIdHttp {
     constructor(private readonly loadSectorById: LoadSectorById) {}
@@ -26,7 +26,7 @@ export class LoadSectorByIdHttpController implements LoadSectorByIdHttp {
                 return badRequest(sector);
             }
 
-            return sucess<LoadSectorByIdHttpOutputDto>(sector);
+            return success<LoadSectorByIdHttpOutputDto>(sector);
         } catch (error) {
             const isError = error instanceof Error;
             if (!isError) return unknownError(error);

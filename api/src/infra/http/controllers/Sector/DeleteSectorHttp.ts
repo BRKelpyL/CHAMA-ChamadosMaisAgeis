@@ -5,7 +5,7 @@ import {
     DeleteSectorHttpOutputDto,
     HttpResponse,
 } from "../..";
-import { badRequest, serverError, sucess, unknownError } from "../../helpers";
+import { badRequest, serverError, success, unknownError } from "../../helpers";
 import { MissingParamError } from "../../errors";
 
 export class DeleteSectorHttpController implements DeleteSectorHttp {
@@ -26,7 +26,7 @@ export class DeleteSectorHttpController implements DeleteSectorHttp {
                 return badRequest(deletedSector);
             }
 
-            return sucess(deletedSector);
+            return success(deletedSector);
         } catch (error) {
             return unknownError(error);
         }

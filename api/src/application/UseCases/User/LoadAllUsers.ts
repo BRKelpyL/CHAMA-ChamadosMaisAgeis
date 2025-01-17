@@ -22,7 +22,7 @@ export class LoadAllUsersUseCase implements LoadAllUsers {
                     id: user.getId(),
                     name: user.getName(),
                     email: user.getEmail(),
-                    password: user.getPassword(),
+                    password: "",
                     isAdmin: user.getIsAdmin(),
                     whatsapp: user.getWhatsapp(),
                     deleted: user.getDeleted(),

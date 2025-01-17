@@ -5,7 +5,7 @@ import {
     DeleteUserHttpOutputDto,
     HttpResponse,
 } from "../..";
-import { badRequest, serverError, sucess, unknownError } from "../../helpers";
+import { badRequest, serverError, success, unknownError } from "../../helpers";
 import { MissingParamError } from "../../errors";
 
 export class DeleteUserByIdHttpController implements DeleteUserByIdHttp {
@@ -26,7 +26,7 @@ export class DeleteUserByIdHttpController implements DeleteUserByIdHttp {
                 return badRequest(deletedUser);
             }
 
-            return sucess<DeleteUserHttpOutputDto>(deletedUser);
+            return success<DeleteUserHttpOutputDto>(deletedUser);
         } catch (error) {
             const isError = error instanceof Error;
             if (!isError) return unknownError(error);

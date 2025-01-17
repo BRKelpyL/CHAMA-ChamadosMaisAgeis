@@ -1,6 +1,11 @@
-import { ServiceOrder, ServiceOrderStatus } from "../../../domain/models";
+import {
+    ServiceOrder,
+    ServiceOrderStatus,
+    UserToServiceOrder,
+} from "../../../domain/models";
 import {
     CreateServiceOrderRepository,
+    CreateUserToServiceOrderRepository,
     LoadSectorByIdRepository,
 } from "../../../domain/repositories";
 import {
@@ -13,6 +18,7 @@ import {
 export class CreateServiceOrderUseCase implements CreateServiceOrder {
     constructor(
         private readonly createServiceOrderRepository: CreateServiceOrderRepository,
+        private readonly createUserToServiceOrderRepository: CreateUserToServiceOrderRepository,
         private readonly loadSectorByIdRepository: LoadSectorByIdRepository,
         private readonly generateIdService: GenerateIdService
     ) {}
@@ -20,7 +26,7 @@ export class CreateServiceOrderUseCase implements CreateServiceOrder {
     public async execute(
         input: CreateServiceOrderInputDto
     ): Promise<CreateServiceOrderOutputDto | Error> {
-        const { title, description, toSectorId } = input;
+        const { authenticatedUserId, title, description, toSectorId } = input;
 
         const verifyToSectorId = await this.loadSectorByIdRepository.load(
             toSectorId
@@ -51,6 +57,16 @@ export class CreateServiceOrderUseCase implements CreateServiceOrder {
         if (!createdServiceOrder) {
             return new Error(`Can not create ServiceOrder`);
         }
+
+        const userToServiceOrder = new UserToServiceOrder({
+            id: this.generateIdService.generate(),
+            userId: authenticatedUserId,
+            serviceOrderId: createdServiceOrder.getId(),
+            relation: "whoIsAskingFor",
+            deleted,
+        });
+
+        await this.createUserToServiceOrderRepository.save(userToServiceOrder);
 
         return {
             id: createdServiceOrder.getId(),

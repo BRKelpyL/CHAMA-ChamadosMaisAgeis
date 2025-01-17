@@ -1,6 +1,8 @@
 import { UseCase } from "../UseCase";
 
 export type CreateServiceOrderInputDto = {
+    authenticatedUserId: string;
+    authenticatedUserRole: string;
     title: string;
     description: string;
     toSectorId: string;

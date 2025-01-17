@@ -1,6 +1,8 @@
 import { HttpController } from "../Controller";
 
 export type CreateServiceOrderHttpInputDto = {
+    authenticatedUserId: string;
+    authenticatedUserRole: string;
     title: string;
     description: string;
     toSectorId: string;

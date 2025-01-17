@@ -16,7 +16,14 @@ import {
     LoadSectorByIdRoute,
     DeleteSectorRoute,
 } from "../routes/Sector";
-import { CreateServiceOrderRoute } from "../routes/ServiceOrder";
+import {
+    CreateServiceOrderRoute,
+    LoadAllServiceOrdersRoute,
+    LoadAllServiceOrdersByUserRelationRoute,
+    LoadServiceOrderByIdRoute,
+    LoadServiceOrdersBySectorRoute,
+} from "../routes/ServiceOrder";
+import { AddUserToSectorRoute } from "../routes/Sector/AddUserToSector";
 
 export type StartServerProps = {
     serverHttpRest: ServerHttpRest;
@@ -40,8 +47,13 @@ export async function startServer(props: StartServerProps): Promise<void> {
     new LoadSectorsRoute(serverHttpRest, prismaClient);
     new LoadSectorByIdRoute(serverHttpRest, prismaClient);
     new DeleteSectorRoute(serverHttpRest, prismaClient);
+    new AddUserToSectorRoute(serverHttpRest, prismaClient);
 
     new CreateServiceOrderRoute(serverHttpRest, prismaClient);
+    new LoadAllServiceOrdersRoute(serverHttpRest, prismaClient);
+    new LoadServiceOrderByIdRoute(serverHttpRest, prismaClient);
+    new LoadAllServiceOrdersByUserRelationRoute(serverHttpRest, prismaClient);
+    new LoadServiceOrdersBySectorRoute(serverHttpRest, prismaClient);
 
     serverHttpRest.listen(port);
 

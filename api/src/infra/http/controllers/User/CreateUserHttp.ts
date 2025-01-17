@@ -38,7 +38,15 @@ export class CreateUserHttpController implements CreateUserHttp {
     private validateRequest(
         request: CreateUserHttpInputDto
     ): MissingParamError | undefined {
-        const requiredFields: ["name", "email", "password"] = [
+        const requiredFields: [
+            "authenticatedUserId",
+            "authenticatedUserRole",
+            "name",
+            "email",
+            "password"
+        ] = [
+            "authenticatedUserId",
+            "authenticatedUserRole",
             "name",
             "email",
             "password",

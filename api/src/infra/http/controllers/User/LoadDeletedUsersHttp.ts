@@ -5,7 +5,7 @@ import {
     LoadDeletedUsersHttpOutputDto,
     HttpResponse,
 } from "../..";
-import { badRequest, serverError, sucess, unknownError } from "../../helpers";
+import { badRequest, serverError, success, unknownError } from "../../helpers";
 
 export class LoadDeletedUsersHttpController implements LoadDeletedUsersHttp {
     constructor(private readonly loadDeletedUsers: LoadDeletedUsers) {}
@@ -19,7 +19,7 @@ export class LoadDeletedUsersHttpController implements LoadDeletedUsersHttp {
                 return badRequest(deletedUsers);
             }
 
-            return sucess<LoadDeletedUsersHttpOutputDto>(deletedUsers);
+            return success<LoadDeletedUsersHttpOutputDto>(deletedUsers);
         } catch (error) {
             const isError = error instanceof Error;
             if (!isError) return unknownError(error);

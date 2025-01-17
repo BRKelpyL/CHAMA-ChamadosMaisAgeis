@@ -6,7 +6,7 @@ import {
     HttpResponse,
     MissingParamError,
 } from "../..";
-import { badRequest, serverError, sucess, unknownError } from "../../helpers";
+import { badRequest, serverError, success, unknownError } from "../../helpers";
 
 export class LoadUserByIdHttpController implements LoadUserByIdHttp {
     constructor(private readonly loadUserById: LoadUserById) {}
@@ -26,7 +26,7 @@ export class LoadUserByIdHttpController implements LoadUserByIdHttp {
                 return badRequest(user);
             }
 
-            return sucess<LoadUserByIdHttpOutputDto>(user);
+            return success<LoadUserByIdHttpOutputDto>(user);
         } catch (error) {
             const isError = error instanceof Error;
             if (!isError) return unknownError(error);
