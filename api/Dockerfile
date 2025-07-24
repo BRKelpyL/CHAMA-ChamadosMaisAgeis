@@ -1,16 +1,12 @@
-# ESSE DOCKERFILE NÃO SERVE PARA DEPLOY, LEMBRE-SE DE ADAPTAR ELE PARA ESSA FUNÇÃO!
-# RODAR ESSA OU QUALQUER OUTRA APLICAÇÃO EM DEV TORNA O SISTEMA SUJEITO A PROBLEMAS DE SEGURANÇA E INSTABILIDADE!
-
 FROM node:23.3.0
 
 WORKDIR /api
 
 COPY . .
 
-# RUN rm -rf node_modules
-# RUN npm install
+RUN npm ci --omit=dev
+RUN npx prisma migrate deploy
 
-CMD [ "npm", "run", "dev" ]
+CMD [ "npm", "run", "server:prod:up" ]
 
-EXPOSE 4001
-# Lembre de trocar o valor em .env
+# EXPOSE 4001
