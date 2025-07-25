@@ -20,7 +20,7 @@ services:
     depends_on:
       - chama-db
     env_file:
-      - ./api/.env
+      - ./.env
 
   chama-nginx:
     build: ./nginx
