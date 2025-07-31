@@ -3,7 +3,7 @@ services:
     image: postgres
     container_name: chama_postgres-db
     volumes:
-      - ./dev-data:/var/lib/postgresql/data
+      - ./chama-data:/var/lib/postgresql/data
     environment:
       - POSTGRES_USER=${POSTGRES_USER}
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
@@ -31,4 +31,4 @@ services:
       - chama-db
 
 volumes:
-  dev-data:
+  chama-data:
