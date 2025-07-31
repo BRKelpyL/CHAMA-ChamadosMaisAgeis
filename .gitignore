@@ -1,13 +1,5 @@
-# Ignore from general
 .env
 dev-data
-
-# Ignore from API
+chama-data
 api/node_modules
-api/.env
 api/dist
-
-# Ignore from nginx
-
-# Ignore from spa
-spa/dist
