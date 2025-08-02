@@ -7,3 +7,4 @@ export * from "./LoadUserByEmailPrisma";
 export * from "./LoadDeletedUsersPrisma";
 export * from "./UpdateUserPrisma";
 export * from "./DeleteUserByIdPrisma";
+export * from "./VerifyUserExistence";

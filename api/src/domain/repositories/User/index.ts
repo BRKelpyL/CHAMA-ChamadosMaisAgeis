@@ -7,3 +7,4 @@ export * from "./LoadUserByEmail";
 export * from "./LoadDeletedUsers";
 export * from "./UpdateUser";
 export * from "./DeleteUserById";
+export * from "./VerifyUserExistence";
