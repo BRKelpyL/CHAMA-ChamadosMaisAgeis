@@ -10,7 +10,7 @@
     },
     "keywords": [],
     "author": "",
-    "license": "ISC",
+    "license": "MIT",
     "description": "",
     "devDependencies": {
         "@types/bcrypt": "^5.0.2",
