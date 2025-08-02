@@ -39,7 +39,7 @@ export class DeleteUserByIdRoute {
             "delete",
             "/user/delete",
             deleteUserByIdHttpController,
-            authUserHttpMiddleware
+            [authUserHttpMiddleware]
         );
     }
 }

@@ -53,7 +53,7 @@ export class UpdateUserRoute {
             "put",
             "/user/update",
             updateUserHttpController,
-            authUserHttpMiddleware
+            [authUserHttpMiddleware]
         );
     }
 }

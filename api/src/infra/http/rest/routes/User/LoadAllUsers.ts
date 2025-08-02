@@ -33,7 +33,7 @@ export class LoadAllUsersRoute {
             "get",
             "/user/getAll",
             loadAllUsersHttpController,
-            authUserHttpMiddleware
+            [authUserHttpMiddleware]
         );
     }
 }

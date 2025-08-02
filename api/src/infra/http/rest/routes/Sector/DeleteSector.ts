@@ -41,7 +41,7 @@ export class DeleteSectorRoute {
             "delete",
             "/sector/delete",
             deleteSectorHttpController,
-            authUserHttpMiddleware
+            [authUserHttpMiddleware]
         );
     }
 }

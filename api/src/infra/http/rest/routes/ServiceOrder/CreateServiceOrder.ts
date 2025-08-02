@@ -48,7 +48,7 @@ export class CreateServiceOrderRoute {
             "post",
             "/serviceOrder/create",
             createServiceOrderHttpController,
-            authUserHttpMiddleware
+            [authUserHttpMiddleware]
         );
     }
 }

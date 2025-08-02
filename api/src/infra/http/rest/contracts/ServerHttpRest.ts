@@ -7,7 +7,7 @@ export interface ServerHttpRest {
         method: RestMethod,
         path: string,
         controller: HttpController,
-        middleware?: HttpMiddleware
+        middlewares?: HttpMiddleware[]
     ) => void;
     listen: (port: number) => void;
 }

@@ -52,7 +52,7 @@ export class CreateUserRoute {
             "post",
             "/user/create",
             createUserHttpController,
-            authUserHttpMiddleware
+            [authUserHttpMiddleware]
         );
     }
 }

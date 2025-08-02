@@ -33,7 +33,7 @@ export class LoadUserByIdRoute {
             "post",
             "/user/getOne",
             loadUserByIdHttpController,
-            authUserHttpMiddleware
+            [authUserHttpMiddleware]
         );
     }
 }

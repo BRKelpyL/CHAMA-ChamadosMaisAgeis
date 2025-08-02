@@ -17,7 +17,7 @@ export class ServerHttpRestExpressAdapter implements ServerHttpRest {
         method: RestMethod,
         path: string,
         controller: HttpController,
-        middleware?: HttpMiddleware
+        middlewares?: HttpMiddleware[]
     ): void {
         this.express[method](path, async (req: Request, res: Response) => {
             const { headers, body, query, params } = req;
@@ -29,18 +29,20 @@ export class ServerHttpRestExpressAdapter implements ServerHttpRest {
                 ...(params ?? {}),
             };
 
-            if (middleware) {
-                const middlewareResponse = await middleware.handle(request);
-                if (
-                    !middlewareResponse ||
-                    middlewareResponse.statusCode !== 200
-                ) {
-                    res.status(middlewareResponse.statusCode).json({
-                        error: middlewareResponse.body.message,
-                    });
-                    return;
+            if (middlewares) {
+                for (const middle of middlewares) {
+                    const middlewareResponse = await middle.handle(request);
+                    if (
+                        !middlewareResponse ||
+                        middlewareResponse.statusCode !== 200
+                    ) {
+                        res.status(middlewareResponse.statusCode).json({
+                            error: middlewareResponse.body.message,
+                        });
+                        return;
+                    }
+                    Object.assign(request, middlewareResponse.body);
                 }
-                Object.assign(request, middlewareResponse.body);
             }
 
             const httpResponse = await controller.handle(request);

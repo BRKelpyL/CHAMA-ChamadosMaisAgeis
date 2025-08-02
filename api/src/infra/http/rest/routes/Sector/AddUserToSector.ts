@@ -49,7 +49,7 @@ export class AddUserToSectorRoute {
             "post",
             "/sector/addUserToSector",
             addUserToSectorHttpController,
-            authUserHttpMiddleware
+            [authUserHttpMiddleware]
         );
     }
 }

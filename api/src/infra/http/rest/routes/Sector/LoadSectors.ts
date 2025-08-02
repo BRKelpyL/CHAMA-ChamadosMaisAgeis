@@ -1,8 +1,10 @@
-import { LoadSectorsUseCase } from "../../../../../application/UseCases";
+import { AuthUserUseCase, LoadSectorsUseCase } from "../../../../../application/UseCases";
 import { ServerHttpRest } from "../../contracts";
 import { LoadSectorsPrismaRepository } from "../../../../database/repositories";
 import { PrismaClient } from "@prisma/client";
 import { LoadSectorsHttpController } from "../../../controllers";
+import { ExtractInfoFromTokenJwtService } from "../../../../services";
+import { AuthUserHttpMiddleware } from "../../../middlewares";
 
 export class LoadSectorsRoute {
     constructor(server: ServerHttpRest, prismaClient: PrismaClient) {
@@ -14,6 +16,14 @@ export class LoadSectorsRoute {
         const loadSectorsHttpController = new LoadSectorsHttpController(
             loadSectorsUseCase
         );
-        server.on("get", "/sector/getActive", loadSectorsHttpController);
+        const extractInfoFromTokenJwtService =
+            new ExtractInfoFromTokenJwtService();        
+        const authUserUseCase = new AuthUserUseCase(
+            extractInfoFromTokenJwtService
+        );
+        const authUserHttpMiddleware = new AuthUserHttpMiddleware(
+            authUserUseCase
+        );
+        server.on("get", "/sector/getActive", loadSectorsHttpController, [authUserHttpMiddleware]);
     }
 }

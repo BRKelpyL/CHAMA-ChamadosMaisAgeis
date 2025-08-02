@@ -34,7 +34,7 @@ export class LoadActiveUsersRoute {
             "get",
             "/user/getActive",
             LoadActiveUserHttpController,
-            authUserHttpMiddleware
+            [authUserHttpMiddleware]
         );
     }
 }

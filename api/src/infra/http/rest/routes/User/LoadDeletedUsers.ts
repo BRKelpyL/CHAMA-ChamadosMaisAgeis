@@ -32,7 +32,7 @@ export class LoadDeletedUsersRoute {
             "get",
             "/user/getDeleted",
             loadDeletedUsersHttpController,
-            authUserHttpMiddleware
+            [authUserHttpMiddleware]
         );
     }
 }

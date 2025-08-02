@@ -32,7 +32,7 @@ export class LoadAllServiceOrdersRoute {
             "get",
             "/serviceOrder/getAll",
             loadAllServiceOrdersHttpController,
-            authUserHttpMiddleware
+            [authUserHttpMiddleware]
         );
     }
 }

@@ -1,12 +1,13 @@
-import { CreateSectorUseCase } from "../../../../../application/UseCases";
+import { AuthUserUseCase, CreateSectorUseCase } from "../../../../../application/UseCases";
 import { ServerHttpRest } from "../../contracts";
 import {
     CreateSectorPrismaRepository,
     LoadSectorByNamePrismaRepository,
 } from "../../../../database/repositories";
 import { PrismaClient } from "@prisma/client";
-import { GenerateIdCryptoUuidService } from "../../../../services";
+import { ExtractInfoFromTokenJwtService, GenerateIdCryptoUuidService } from "../../../../services";
 import { CreateSectorHttpController } from "../../../controllers";
+import { AuthUserHttpMiddleware } from "../../../middlewares";
 
 export class CreateSectorRoute {
     constructor(server: ServerHttpRest, prismaClient: PrismaClient) {
@@ -24,6 +25,15 @@ export class CreateSectorRoute {
         const createSectorHttpController = new CreateSectorHttpController(
             createSectorUseCase
         );
-        server.on("post", "/sector/create", createSectorHttpController);
+        const extractInfoFromTokenJwtService =
+            new ExtractInfoFromTokenJwtService();
+
+        const authUserUseCase = new AuthUserUseCase(
+            extractInfoFromTokenJwtService
+        );
+        const authUserHttpMiddleware = new AuthUserHttpMiddleware(
+            authUserUseCase
+        );
+        server.on("post", "/sector/create", createSectorHttpController, [authUserHttpMiddleware]);
     }
 }

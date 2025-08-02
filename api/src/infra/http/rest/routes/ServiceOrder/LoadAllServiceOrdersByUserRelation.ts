@@ -37,7 +37,7 @@ export class LoadAllServiceOrdersByUserRelationRoute {
             "post",
             "/serviceOrder/getAllServiceOrdersByUserRelation",
             loadAllServiceOrdersByUserRelationHttpController,
-            authUserHttpMiddleware
+            [authUserHttpMiddleware]
         );
     }
 }

@@ -43,7 +43,7 @@ export class UpdateSectorRoute {
             "post",
             "/sector/update",
             updateSectorHttpController,
-            authUserHttpMiddleware
+            [authUserHttpMiddleware]
         );
     }
 }

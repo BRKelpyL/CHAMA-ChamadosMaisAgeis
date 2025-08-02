@@ -34,7 +34,7 @@ export class LoadServiceOrdersBySectorRoute {
             "post",
             "/serviceOrder/getBySector",
             loadServiceOrdersBySectorHttpController,
-            authUserHttpMiddleware
+            [authUserHttpMiddleware]
         );
     }
 }
