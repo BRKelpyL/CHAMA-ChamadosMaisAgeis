@@ -24,6 +24,7 @@ import {
     LoadServiceOrdersBySectorRoute,
 } from "../routes/ServiceOrder";
 import { AddUserToSectorRoute } from "../routes/Sector/AddUserToSector";
+import { userSeed } from "./seed";
 
 export type StartServerProps = {
     serverHttpRest: ServerHttpRest;
@@ -33,6 +34,8 @@ export type StartServerProps = {
 export async function startServer(props: StartServerProps): Promise<void> {
     const prismaClient = new PrismaClient();
     const { serverHttpRest, port } = props;
+
+    console.log(await userSeed(prismaClient))
 
     new CreateUserRoute(serverHttpRest, prismaClient);
     new LoadAllUsersRoute(serverHttpRest, prismaClient);
