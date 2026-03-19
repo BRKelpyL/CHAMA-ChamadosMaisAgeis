@@ -1,6 +1,6 @@
 services:
   chama-db:
-    image: postgres
+    image: postgres:17.9
     container_name: chama_postgres-db
     volumes:
       - ./chama-data:/var/lib/postgresql/data
